@@ -2,6 +2,10 @@
     const express = require('express')
     const fs = require('fs');
 
+    const Vue = require('vue');
+    const vuetify = require('./plugins/vuetify');
+    const index = require ('./index.vue')
+
     require('dotenv').config();
 
     const app = express()
@@ -25,6 +29,11 @@
     this.paused = bool;
     }
 
+    new Vue({
+        vuetify,
+        render: h => h(index)
+    }).$mount('#app')
+
     const { Player } = require("discord-music-player");
     const player = new Player(client, {
     leaveOnEmpty: true,
@@ -40,7 +49,9 @@
         playerArray.push(new Server(id, false));
     });
     
-    client.user.setActivity('those sick beats');  
+    client.user.setActivity('those sick beats'); 
+    
+    
     })
 
     client.api.applications('676575206214729748').guilds('698980600001855547').commands.post({
