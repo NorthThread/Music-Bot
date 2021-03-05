@@ -2,9 +2,6 @@
     const express = require('express')
     const fs = require('fs');
 
-    const Vue = require('vue');
-    const vuetify = require('./plugins/vuetify');
-    const index = require ('./index.vue')
 
     require('dotenv').config();
 
@@ -29,10 +26,6 @@
     this.paused = bool;
     }
 
-    new Vue({
-        vuetify,
-        render: h => h(index)
-    }).$mount('#app')
 
     const { Player } = require("discord-music-player");
     const player = new Player(client, {
@@ -160,16 +153,6 @@
         });
     })
 
-    app.get('/api/pause',async (req, res) =>{
-    client.player.pause('698980600001855547')
-    serverIndex = playerArray.findIndex((s => s.server_id == 698980600001855547));
-    playerArray[serverIndex].paused = true;
-    res.status(200)
-    res.send("paused")
-    });
-
-    app.listen(3000, ()=>{
-    console.log("listening on port 3000")
-    })
+    
 
     client.login(process.env.BOT_TOKEN);
