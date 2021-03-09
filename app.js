@@ -2,6 +2,10 @@
     const express = require('express')
     const fs = require('fs');
 
+    const YoutubeMusicApi = require('youtube-music-api')
+    const you = new YoutubeMusicApi()
+    you.initalize()
+
 
     require('dotenv').config();
 
@@ -153,6 +157,15 @@
         });
     })
 
-    
+    app.get('/api/yt/search/:searchString', async (req, res) => {
+        let data = await you.search(`${req.params}`, "video").then(response => console.log(response))
+        res.json(data)
+      })
+    app.listen(3000, async () => {
+       
+        console.log("server running on port 3000");
+      });
+
+      
 
     client.login(process.env.BOT_TOKEN);
