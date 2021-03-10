@@ -32,6 +32,7 @@
 
 
     const { Player } = require("discord-music-player");
+const { response } = require('express');
     const player = new Player(client, {
     leaveOnEmpty: true,
     leaveOnStop: true,
@@ -158,7 +159,7 @@
     })
 
     app.get('/api/yt/search/:searchString', async (req, res) => {
-        let data = await you.search(`${req.params}`, "video").then(response => console.log(response))
+        let data = await you.search(req.params.searchString, "video").then(response => console.log(response))   
         res.json(data)
       })
     app.listen(3000, async () => {
